@@ -1,0 +1,6 @@
+langchain
+huggingface_hub
+llama-index
+chromadb
+requests
+beautifulsoup4

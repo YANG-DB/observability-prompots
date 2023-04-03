@@ -1,0 +1,66 @@
+this document helps the understanding of how to correlate observability information using the simple schema for observability indices
+our observability signals are actually divided into the next 3 categories - traces, logs, metrics
+each category can be represented by an index that has the following prefix `sso_traces-` for traces, `sso_logs-` for logs and  `sso_metrics-` for metrics
+in addition we have a services type observability information index which has the following prefix `sso_services-` each signal may arrive from a specific service within the observed system
+
+for example the next indices are not considered related to the observability schema since they don't follow the prefix naming patterns stated above:
+
+- opensearch_dashboards_sample_data_logs
+- opensearch_dashboards_sample_data_flights
+- sample-http-responses
+- opensearch_dashboards_sample_data_ecommerce
+
+And the sso_logs-nginx-prod is related to the observability schema since it follows the logs prefix notation : `sso_logs-`
+
+How to correlate observability information across multiple signal types :
+we can correlate information from one index to another using the following common fields:
+all signals may share a traceId field that can be later used to correlate different signals - traceId source document is prefent in the traces index
+all signals may share a serviceName field that can be later used to correlate different signals - serviceName source document is present in a services index
+
+for example given the next indices
+ - sso_logs-us-prod - containing logs from our system
+ - sso_metrics-us-prod - containing metrics from our system
+ - sso_traces-us-prod - containing traces from our system
+ - sso_services-us-prod - containing services from our system
+
+ lets create a correlation query based on the serviceName field which has the source in the sso_services-us-prod index
+
+ `GET sso_logs-us-prod,sso_metrics-us-prod,sso_traces-us-prod,sso_services-us-prod/_search
+  {
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "exists": {
+              "field": "serviceName"
+            }
+          }
+        ]
+      }
+    },
+    "aggs": {
+      "group_by_serviceName": {
+        "terms": {
+          "field": "serviceName.keyword"
+        },
+        "aggs": {
+          "group_by_index": {
+            "terms": {
+              "field": "_index"
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+
+
+ This query does the following:
+
+ It selects data from all four indices: sso_logs-us-prod, sso_metrics-us-prod, sso_traces-us-prod, and sso_services-us-prod.
+ It filters out any documents that do not have a serviceName field.
+ It groups the documents by serviceName and _index, and calculates the count of documents in each group.
+ It sorts the results by serviceName and _index.
+ This query will give you an overview of the number of documents in each index, grouped by serviceName. This allows you to see the correlation between different observability signals based on the serviceName field, which has its source in the sso_services-us-prod index.
