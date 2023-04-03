@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: Observability AI Assistant API
+  description: API for interacting with an Observability AI Assistant
+  version: '1.0'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /question:
+    post:
+      summary: Ask a question to the AI Assistant
+      description: Ask a question to the Observability AI Assistant and get an answer
+      requestBody:
+        description: The question to ask the AI Assistant
+        required: true
+        content:
+          text/plain:
+            schema:
+              type: string
+              example: what is an integration ?
+      responses:
+        '200':
+          description: An answer from the AI Assistant
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Observability chat will answer your question here"
+
+servers:
+  - url: http://127.0.0.1:8000
+    description: Observability AI server

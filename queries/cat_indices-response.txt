@@ -1,0 +1,30 @@
+This is a response for the `_cat/indices` API
+the response is combined from 2 columns, the first column is the index status, the second column is the index name
+
+index status: green open, index name: sample-ecommerce
+index status: green open, index name: .kibana_92668751_admin_1
+index status: green open, index name: moviegeek-logs-2023.03.24
+index status: green open, index name: .opendistro-reports-definitions
+index status: green open, index name: .kibana_1
+index status: green open, index name: .opendistro_security
+index status: green open, index name: .opendistro-reports-instances
+index status: green open, index name: otel-v1-apm-span-000001
+index status: green open, index name: sample-host-health
+index status: green open, index name: security-auditlog-2023.03.24
+index status: green open, index name: imdb-data
+index status: green open, index name: .opensearch-observability
+index status: green open, index name: metricbeat-2023.03.24
+index status: green open, index name: opensearch_dashboards_sample_data_logs
+index status: green open, index name: opensearch_dashboards_sample_data_flights
+index status: green open, index name: sample-http-responses
+
+index status: green open, index name: sso_logs-nginx-prod
+index status: green open, index name: sso_traces-us-prod
+index status: green open, index name: sso_metrics-us-prod
+index status: green open, index name: sso_logs-aws-alb
+
+
+index status: green open, index name: otel-v1-apm-service-map
+index status: green open, index name: .opendistro-job-scheduler-lock
+index status: green open, index name: opensearch_dashboards_sample_data_ecommerce
+index status: green open, index name: .opensearch-notifications-config

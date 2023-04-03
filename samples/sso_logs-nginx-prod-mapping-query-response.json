@@ -1,0 +1,404 @@
+{
+  "sso_logs-nginx-prod": {
+    "aliases": {},
+    "mappings": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "attributes": {
+          "properties": {
+            "data_stream": {
+              "properties": {
+                "dataset": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                },
+                "namespace": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                },
+                "type": {
+                  "type": "keyword",
+                  "ignore_above": 56
+                }
+              }
+            }
+          }
+        },
+        "body": {
+          "type": "text"
+        },
+        "communication": {
+          "properties": {
+            "destination": {
+              "properties": {
+                "address": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 1024
+                    }
+                  }
+                },
+                "bytes": {
+                  "type": "long"
+                },
+                "domain": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 1024
+                    }
+                  }
+                },
+                "ip": {
+                  "type": "ip"
+                },
+                "mac": {
+                  "type": "keyword",
+                  "ignore_above": 1024
+                },
+                "packets": {
+                  "type": "long"
+                },
+                "port": {
+                  "type": "long"
+                }
+              }
+            },
+            "sock": {
+              "properties": {
+                "family": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "source": {
+              "properties": {
+                "address": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 1024
+                    }
+                  }
+                },
+                "bytes": {
+                  "type": "long"
+                },
+                "domain": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 1024
+                    }
+                  }
+                },
+                "ip": {
+                  "type": "ip"
+                },
+                "mac": {
+                  "type": "keyword",
+                  "ignore_above": 1024
+                },
+                "packets": {
+                  "type": "long"
+                },
+                "port": {
+                  "type": "long"
+                }
+              }
+            }
+          }
+        },
+        "container_id": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "container_name": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "event": {
+          "properties": {
+            "category": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "domain": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "exception": {
+              "properties": {
+                "message": {
+                  "type": "keyword",
+                  "ignore_above": 1024
+                },
+                "stacktrace": {
+                  "type": "text"
+                },
+                "type": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "kind": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "name": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "result": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "type": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "http": {
+          "properties": {
+            "client": {
+              "properties": {
+                "ip": {
+                  "type": "ip"
+                }
+              }
+            },
+            "flavor": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "request": {
+              "properties": {
+                "body": {
+                  "properties": {
+                    "content": {
+                      "type": "text"
+                    }
+                  }
+                },
+                "bytes": {
+                  "type": "long"
+                },
+                "id": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "method": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                },
+                "mime_type": {
+                  "type": "keyword",
+                  "ignore_above": 1024
+                },
+                "referrer": {
+                  "type": "keyword",
+                  "ignore_above": 1024
+                }
+              }
+            },
+            "resent_count": {
+              "type": "integer"
+            },
+            "response": {
+              "properties": {
+                "body": {
+                  "properties": {
+                    "content": {
+                      "type": "text"
+                    }
+                  }
+                },
+                "bytes": {
+                  "type": "long"
+                },
+                "id": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "status_code": {
+                  "type": "integer"
+                }
+              }
+            },
+            "route": {
+              "type": "keyword",
+              "ignore_above": 1024
+            },
+            "schema": {
+              "type": "keyword",
+              "ignore_above": 1024
+            },
+            "target": {
+              "type": "keyword",
+              "ignore_above": 1024
+            },
+            "url": {
+              "type": "keyword",
+              "ignore_above": 2048
+            },
+            "user_agent": {
+              "type": "keyword",
+              "ignore_above": 2048
+            }
+          }
+        },
+        "instrumentationScope": {
+          "properties": {
+            "dropped_attributes_count": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                }
+              }
+            },
+            "schemaUrl": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "version": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "log": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "observedTimestamp": {
+          "type": "date"
+        },
+        "observerTime": {
+          "type": "date"
+        },
+        "schemaUrl": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "severity": {
+          "properties": {
+            "number": {
+              "type": "long"
+            },
+            "text": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "source": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "spanId": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "span_id": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "traceId": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "trace_id": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "creation_date": "1679633214652",
+        "number_of_shards": "1",
+        "number_of_replicas": "1",
+        "uuid": "QbCZ4FX6TLm6PCu8Y1Y9VQ",
+        "version": {
+          "created": "136277827"
+        },
+        "provided_name": "sso_logs-nginx-prod"
+      }
+    }
+  }
+}

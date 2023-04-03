@@ -1,0 +1,58 @@
+in opensearch an index had a mapping that reflects its structure and fields.
+in order to get the indices list from the opensearch cluster one must call the `_cat/indices` API
+this api returns a list of indices
+
+Each index can be than called using the `index_name/_mapping` API
+This call response has a mapping object field which contains an inner object field named _meta.
+The _meta field contains metadata information about the index's mapping - such as
+1. "component": "log" - this component field explicitly refers to the observability log template
+2. "type": "logs" - this type field explicitly refers to the Observability category type
+3. "version": "1.0.0" - this version field refers to the observability schema version
+4. "catalog": "observability" - this catalog field refers to the catalog type - in this example the observability
+
+Overall the meta give the capability to understand the catalog, category and explicit components for each index.
+
+For example the  `_cat/indices` returns the next response:
+
+index status: green open, index name: opensearch_dashboards_sample_data_logs ,
+index status: green open, index name: opensearch_dashboards_sample_data_flights
+index status: green open, index name: sample-http-responses
+index status: green open, index name: sso_logs-nginx-prod
+index status: green open, index name: sso_metrics-us-prod
+index status: green open, index name: sso_traces-us-prod
+index status: green open, index name: otel-v1-apm-service-map
+index status: green open, index name: .opendistro-job-scheduler-lock
+index status: green open, index name: opensearch_dashboards_sample_data_ecommerce
+index status: green open, index name: .opensearch-notifications-config
+
+lets assume we would like to know the catalog and category for the `sso_logs-nginx-prod` index
+we will query the index using the next call  `sso_logs-nginx-prod/_mapping`
+This will produce the next json response from which we will take the `mapping._meta` field
+{
+  "sso_logs-nginx-prod": {
+    "mappings": {
+      "_meta": {
+        "component": "log",
+        "type": "logs",
+        "version": "1.0.0",
+        "catalog": "observability"
+      },
+      "_data_stream_timestamp": {
+        "enabled": true
+      },
+      "dynamic_templates": [
+        {
+          "request_header_map": {
+            "path_match": "request.header.*",
+...
+}
+
+the `mapping._meta` contains the next attributes:
+"component": "log", "type": "logs", "version": "1.0.0", "catalog": "observability" and we can infer that the sso_logs-nginx-prod belongs to the observability schema,
+it contains log category signals and has the logs template structure.
+
+so the following questions:
+ - which observability indices does my system contains ?
+ - which logs indices do i have ?
+ - what is the mapping type for sso_logs-nginx-prod index ?
+can now be answered based on these assumptions

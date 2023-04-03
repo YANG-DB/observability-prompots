@@ -1,0 +1,282 @@
+{
+  "sso_metrics-us-prod": {
+    "aliases": {},
+    "mappings": {
+      "_meta": {
+        "version": "1.0.0"
+      },
+      "_data_stream_timestamp": {
+        "enabled": true
+      },
+      "dynamic_templates": [
+        {
+          "attributes_map": {
+            "path_match": "attributes.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
+          "resources_map": {
+            "path_match": "resource.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
+          "exemplar_attributes_map": {
+            "path_match": "exemplar.attributes.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
+          "instrumentation_scope_attributes_map": {
+            "path_match": "instrumentationScope.attributes.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        }
+      ],
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "aggregationTemporality": {
+          "type": "keyword",
+          "ignore_above": 128
+        },
+        "attributes": {
+          "properties": {
+            "data_stream": {
+              "properties": {
+                "dataset": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                },
+                "namespace": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                },
+                "type": {
+                  "type": "keyword",
+                  "ignore_above": 56
+                }
+              }
+            }
+          }
+        },
+        "bucketCount": {
+          "type": "long"
+        },
+        "bucketCountsList": {
+          "type": "long"
+        },
+        "buckets": {
+          "properties": {
+            "count": {
+              "type": "long"
+            },
+            "max": {
+              "type": "float"
+            },
+            "min": {
+              "type": "float"
+            },
+            "sum": {
+              "type": "double"
+            }
+          }
+        },
+        "count": {
+          "type": "long"
+        },
+        "description": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "exemplar": {
+          "properties": {
+            "spanId": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "time": {
+              "type": "date"
+            },
+            "traceId": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "explicitBoundsCount": {
+          "type": "float"
+        },
+        "explicitBoundsList": {
+          "type": "float"
+        },
+        "instrumentationScope": {
+          "properties": {
+            "droppedAttributesCount": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                }
+              }
+            },
+            "schemaUrl": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "version": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "kind": {
+          "type": "keyword",
+          "ignore_above": 128
+        },
+        "max": {
+          "type": "float"
+        },
+        "min": {
+          "type": "float"
+        },
+        "monotonic": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "negativeBuckets": {
+          "properties": {
+            "count": {
+              "type": "long"
+            },
+            "max": {
+              "type": "float"
+            },
+            "min": {
+              "type": "float"
+            }
+          }
+        },
+        "negativeOffset": {
+          "type": "integer"
+        },
+        "observedTimestamp": {
+          "type": "date_nanos"
+        },
+        "positiveBuckets": {
+          "properties": {
+            "count": {
+              "type": "long"
+            },
+            "max": {
+              "type": "float"
+            },
+            "min": {
+              "type": "float"
+            }
+          }
+        },
+        "positiveOffset": {
+          "type": "integer"
+        },
+        "quantileValuesCount": {
+          "type": "long"
+        },
+        "quantiles": {
+          "properties": {
+            "quantile": {
+              "type": "double"
+            },
+            "value": {
+              "type": "double"
+            }
+          }
+        },
+        "scale": {
+          "type": "long"
+        },
+        "schemaUrl": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "startTime": {
+          "type": "date"
+        },
+        "sum": {
+          "type": "float"
+        },
+        "unit": {
+          "type": "keyword",
+          "ignore_above": 128
+        },
+        "value": {
+          "properties": {
+            "double": {
+              "type": "double"
+            },
+            "int": {
+              "type": "integer"
+            }
+          }
+        },
+        "zeroCount": {
+          "type": "long"
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "creation_date": "1679633214652",
+        "number_of_shards": "1",
+        "number_of_replicas": "1",
+        "uuid": "QbCZ4FX6TLm6PCu8Y1Y9VQ",
+        "version": {
+          "created": "136277827"
+        },
+        "provided_name": "sso_metrics-us-prod"
+      }
+    }
+  }
+}

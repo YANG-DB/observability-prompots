@@ -1,0 +1,39 @@
+Query: index=sso_logs-nginx-prod | stats count by http.properties.user_agent
+Explanation: This query retrieves the number of requests grouped by User-Agent.
+Description: Count of requests per User-Agent
+
+Query: index=sso_logs-nginx-prod | stats count by http.properties.response.properties.status_code
+Explanation: This query retrieves the number of requests grouped by HTTP status code.
+Description: Count of requests per HTTP status code
+
+Query: index=sso_logs-nginx-prod http.properties.response.properties.status_code>=500 | stats count
+Explanation: This query retrieves the total number of server errors (HTTP status codes 500 or higher).
+Description: Count of server errors
+
+Query: index=sso_logs-nginx-prod | timechart count by http.properties.response.properties.status_code
+Explanation: This query retrieves a time series chart of requests grouped by HTTP status code.
+Description: Time series chart of requests per HTTP status code
+
+Query: index=sso_logs-nginx-prod | stats avg(http.properties.request.properties.bytes), avg(http.properties.response.properties.bytes) by container_name
+Explanation: This query retrieves the average request and response sizes per container name.
+Description: Average request and response sizes per container
+
+Query: index=sso_logs-nginx-prod | stats count by communication.properties.source.properties.ip
+Explanation: This query retrieves the number of requests grouped by source IP address.
+Description: Count of requests per source IP address
+
+Query: index=sso_logs-nginx-prod | stats count(eval(http.properties.response.properties.status_code>=400 and http.properties.response.properties.status_code<500)) as client_errors, count(eval(http.properties.response.properties.status_code>=500)) as server_errors
+Explanation: This query retrieves the total number of client and server errors.
+Description: Count of client and server errors
+
+Query: index=sso_logs-nginx-prod | timechart count by http.properties.request.properties.method
+Explanation: This query retrieves a time series chart of requests grouped by HTTP method (GET, POST, etc.).
+Description: Time series chart of requests per HTTP method
+
+Query: index=sso_logs-nginx-prod event.properties.exception.properties.type=* | stats count by event.properties.exception.properties.type
+Explanation: This query retrieves the number of exceptions grouped by exception type.
+Description: Count of exceptions per exception type
+
+Query: index=sso_logs-nginx-prod | timechart count(eval(http.properties.response.properties.status_code>=400 and http.properties.response.properties.status_code<500)) as client_errors, count(eval(http.properties.response.properties.status_code>=500)) as server_errors
+Explanation: This query retrieves a time series chart of client and server errors.
+Description: Time series chart of client and server error

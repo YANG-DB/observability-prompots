@@ -1,0 +1,223 @@
+{
+  "sso_traces-us-prod": {
+    "aliases": {},
+    "mappings": {
+      "_meta": {
+        "version": "1.0.0"
+      },
+      "_data_stream_timestamp": {
+        "enabled": true
+      },
+      "dynamic_templates": [
+        {
+          "attributes_map": {
+            "path_match": "attributes.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
+          "events_attributes_map": {
+            "path_match": "events.attributes.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
+          "links_attributes_map": {
+            "path_match": "links.attributes.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
+          "instrumentation_scope_attributes_map": {
+            "path_match": "instrumentationScope.attributes.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        },
+        {
+          "resources_map": {
+            "path_match": "resource.*",
+            "mapping": {
+              "type": "keyword"
+            }
+          }
+        }
+      ],
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "attributes": {
+          "properties": {
+            "data_stream": {
+              "properties": {
+                "dataset": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                },
+                "namespace": {
+                  "type": "keyword",
+                  "ignore_above": 128
+                },
+                "type": {
+                  "type": "keyword",
+                  "ignore_above": 56
+                }
+              }
+            },
+            "serviceName": {
+              "type": "keyword"
+            }
+          }
+        },
+        "droppedAttributesCount": {
+          "type": "long"
+        },
+        "droppedEventsCount": {
+          "type": "long"
+        },
+        "droppedLinksCount": {
+          "type": "long"
+        },
+        "endTime": {
+          "type": "date_nanos"
+        },
+        "events": {
+          "type": "nested",
+          "properties": {
+            "@timestamp": {
+              "type": "date_nanos"
+            },
+            "name": {
+              "type": "keyword",
+              "ignore_above": 1024
+            },
+            "observedTimestamp": {
+              "type": "date_nanos"
+            }
+          }
+        },
+        "instrumentationScope": {
+          "properties": {
+            "droppedAttributesCount": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "keyword"
+            },
+            "schemaUrl": {
+              "type": "keyword"
+            },
+            "version": {
+              "type": "keyword"
+            }
+          }
+        },
+        "kind": {
+          "type": "keyword",
+          "ignore_above": 128
+        },
+        "links": {
+          "type": "nested",
+          "properties": {
+            "spanId": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "traceId": {
+              "type": "keyword",
+              "ignore_above": 256
+            },
+            "traceState": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "name": {
+          "type": "keyword",
+          "ignore_above": 1024
+        },
+        "parentSpanId": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "schemaUrl": {
+          "type": "keyword"
+        },
+        "spanId": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "startTime": {
+          "type": "date_nanos"
+        },
+        "status": {
+          "properties": {
+            "code": {
+              "type": "long"
+            },
+            "message": {
+              "type": "keyword",
+              "ignore_above": 128
+            }
+          }
+        },
+        "traceGroup": {
+          "type": "keyword",
+          "ignore_above": 1024
+        },
+        "traceGroupFields": {
+          "properties": {
+            "durationInNanos": {
+              "type": "long"
+            },
+            "endTime": {
+              "type": "date_nanos"
+            },
+            "statusCode": {
+              "type": "integer"
+            }
+          }
+        },
+        "traceId": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "traceState": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "creation_date": "1679633214652",
+        "number_of_shards": "1",
+        "number_of_replicas": "1",
+        "uuid": "QbCZ4FX6TLm6PCu8Y1Y9VQ",
+        "version": {
+          "created": "136277827"
+        },
+        "provided_name": "sso_traces-us-prod"
+      }
+    }
+  }
+}

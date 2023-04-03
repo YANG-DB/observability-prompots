@@ -1,0 +1,16 @@
+To represent a log index, you can focus on the most essential fields that provide valuable information about the logs.
+
+Next fields can be found in a generic log index:
+
+@timestamp: Timestamp of when the log was generated.
+log.level: The log level (e.g., ERROR, WARN, INFO, DEBUG) that indicates the severity of the log.
+log.message: The actual log message describing the event or issue.
+host.name: The name of the host generating the log.
+host.ip: The IP address of the host generating the log.
+service.name: The name of the service or application generating the log.
+service.version: The version of the service or application generating the log.
+event.module: The module or package generating the log.
+event.dataset: The dataset or log source of the event.
+
+This minimal set of fields provides essential information about the log entry, such as when it occurred, the severity, the message itself, and details about the host and service generating the log.
+You can extend this minimal set with more specific fields as needed for your use case.
