@@ -150,4 +150,16 @@ search from sso_logs-nginx-prod
 | stats avg(count) as avg_errors_per_day
 
 ```
+
+
+
+> **_Q:_** can you create a ppl query to retrieves the number of requests grouped by User-Agent in the same index ?
+
+> **_A:_**
+```text
+ `index=sso_logs-nginx-prod | stats count by http.properties.user_agent` 
+ 
+ This PPL query retrieves the number of requests grouped by User-Agent in the 'sso_logs-nginx-prod' log index.
+```
+
 ---
