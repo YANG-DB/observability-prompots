@@ -29,6 +29,21 @@ The repository is organized into the following sections:
 
 To use the prompts in this repository, simply choose the relevant prompt from the appropriate section, and input it into your LLM-powered tool. The AI model should generate a response or provide assistance based on the prompt and context provided.
 
+### Run Demo
+```text
+pip install -r requirements.txt
+
+uvicorn main:app --reload   
+
+curl -X 'POST' \
+        'http://127.0.0.1:8000/question' \
+        -H 'accept: text/plain' \
+        -H 'Content-Type: text/plain' \
+        -d 'what is an integration ?'
+```
+
+---
+
 ## Contributing
 
 We encourage community contributions to help improve and expand the collection of prompts in this repository. If you have an idea for a new prompt or an improvement to an existing one, please submit a pull request or open an issue to discuss your suggestions.
