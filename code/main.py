@@ -45,7 +45,7 @@ When requested to create a query always create a ppl query unless the request ex
 {context}"""
 messages = [
     SystemMessagePromptTemplate.from_template(system_template),
-    HumanMessagePromptTemplate.from_template("{question}")
+    HumanMessagePromptTemplate.from_template("{question}"),
 ]
 prompt = ChatPromptTemplate.from_messages(messages)
 
@@ -54,24 +54,34 @@ prompt = ChatPromptTemplate.from_messages(messages)
 documents = loadDocuments()
 llm = OpenAI(temperature=1e-10)
 
-# vector store generation using embedding
+# # vector store generation using embedding
 vectorstore = Chroma.from_documents(documents, OpenAIEmbeddings())
-streaming_llm = ChatOpenAI(streaming=True, callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
-                           verbose=True, temperature=0.5)
+streaming_llm = ChatOpenAI(
+    streaming=True,
+    callback_manager=CallbackManager([StreamingStdOutCallbackHandler()]),
+    verbose=True,
+    temperature=0.5,
+)
 
 # lang chain `staff` chain type
 question_generator = LLMChain(llm=llm, prompt=CONDENSE_QUESTION_PROMPT)
 doc_chain = load_qa_chain(streaming_llm, chain_type="stuff", prompt=prompt)
 
 # chat vector chain
-qa = ChatVectorDBChain(vectorstore=vectorstore, combine_docs_chain=doc_chain, question_generator=question_generator)
+qa = ChatVectorDBChain(
+    vectorstore=vectorstore,
+    combine_docs_chain=doc_chain,
+    question_generator=question_generator,
+)
 
 
 @app.post("/question")
 async def question(query: str = Body(...)):
     global chat_history  # Declare chat_history as a global variable
-    result = qa({"question": query, "chat_history": chat_history}, return_only_outputs=True)
+    result = qa(
+        {"question": query, "chat_history": chat_history}, return_only_outputs=True
+    )
 
     chat_history.append((query, result["answer"]))
-    vectorstore.add_texts(texts=[query,result["answer"]])
+    vectorstore.add_texts(texts=[query, result["answer"]])
     return result
