@@ -1,0 +1,209 @@
+The following are PPL queries samples including a detailed description of each query
+
+Query1 : source=my-index | where error_count > 10 | stats count() by service
+Count the number of occurrences of each service where the error count is greater than 10.
+
+Query2 : source=my-index | where response_time > 500 | stats avg(response_time) by endpoint
+Calculate the average response time for each endpoint where the response time is greater than 500 milliseconds.
+
+Query3 : source=my-index | top 10 client_ip by bytes_sent
+Find the top 10 client IPs based on the total bytes sent.
+
+Query4 : source=my-index | where http_status >= 400 | stats count() by http_status
+Count the occurrences of each HTTP status code where the status code is greater than or equal to 400 (error codes).
+
+Query5 : source=my-index | stats count() by user_agent | sort - count()
+Count the occurrences of each user agent and sort the results in descending order.
+
+Query6 : source=my-index | where event_type="login" and status="failure" | stats count() by username
+Count the number of failed login attempts for each username.
+
+Query7 : source=my-index | where event_type="transaction" | stats sum(amount) by currency
+Calculate the total transaction amount for each currency.
+
+Query8 : source=my-index | where response_time > 1000 | stats count() by endpoint, client_ip
+Count the occurrences of each endpoint and client IP combination where the response time is greater than 1 second.
+
+Query9 : source=my-index | where request_method="POST" | stats count() by endpoint
+Count the occurrences of each endpoint where the request method is "POST".
+
+Query10 : source=my-index | where event_type="error" | stats count() by error_code, error_message
+Count the occurrences of each error code and error message combination for events with an "error" type.
+
+Query11 : source=my-index | where event_type="purchase" | stats sum(price) by product_id
+Calculate the total purchase price for each product ID in events with a "purchase" type.
+
+Query12 : source=my-index | where event_type="search" | stats count() by search_term
+Count the occurrences of each search term in events with a "search" type.
+
+Query13 :source=my-index | where event_type="page_view" | stats count() by page_url
+Count the number of page views for each page URL in events with a "page_view" type.
+
+Query14 :source=my-index | where event_type="click" | stats count() by element_id
+Count the number of clicks for each element ID in events with a "click" type.
+
+Query15 :source=my-index | where event_type="signup" | stats count() by referral_source
+Count the number of signups for each referral source in events with a "signup" type.
+
+Query16: source=my-index | where event_type="download" | stats count() by file_type
+Count the number of downloads for each file type in events with a "download" type.
+
+Query17 : source=my-index | where event_type="signup" and country="United States" | stats count() by state
+Count the number of signups from the United States, grouped by state.
+
+Query18 : source=my-index | where event_type="login" and status="success" | stats count() by hour(timestamp)
+Count the number of successful logins for each hour of the day.
+
+Query19 : source=my-index | where event_type="page_view" | stats count() by referrer_domain
+Count the number of page views grouped by referrer domain.
+
+Query20 : source=my-index | where event_type="error" and error_severity="critical" | stats count() by day(timestamp)
+Count the number of critical errors for each day.
+
+Query21 : source=my-index | where event_type="API_call" | stats count() by endpoint, http_method
+Count the number of API calls for each endpoint and HTTP method combination.
+
+Query22 : source=my-index | where event_type="resource_usage" | stats avg(cpu_usage), avg(memory_usage) by host
+Calculate the average CPU and memory usage for each host.
+
+Query23 : source=my-index | where event_type="session" | stats count() by day(timestamp), user_id
+Count the number of sessions for each user, grouped by day.
+
+Query24 : source=my-index | where event_type="purchase" | stats sum(quantity) by product_id, day(timestamp)
+Calculate the total quantity of each product sold, grouped by day.
+
+Query25 : source=my-index | where event_type="cart" and action="add" | stats count() by product_id
+Count the number of times each product was added to a cart.
+
+Query26 : source=my-index | where event_type="video_play" | stats avg(playback_duration) by video_id
+Calculate the average playback duration for each video.
+
+Query27 : source=my-index | where event_type="message" | stats count() by day(timestamp), conversation_id
+Count the number of messages for each conversation, grouped by day.
+
+Query28 : source=my-index | where event_type="vote" | stats count() by option_id, poll_id
+Count the number of votes for each option within each poll.
+
+Query29 : source=my-index | where event_type="subscription" | stats count() by plan_id, month(timestamp)
+Count the number of subscriptions for each plan, grouped by month.
+
+Query30 : source=my-index | where event_type="ticket" | stats count() by ticket_status, day(timestamp)
+Count the number of tickets for each status, grouped by day.
+
+Query31 : source=my-index | where event_type="ad_click" | stats count() by ad_id, day(timestamp)
+Count the number of clicks for each ad, grouped by day.
+
+Query32 : source=my-index | where event_type="storage_usage" | stats max(used_space) by day(timestamp), user_id
+Calculate the maximum used storage space for each user, grouped by day.
+
+Query33 : source=my-index | where event_type="email" and status="sent" | stats count() by day(timestamp), campaign_id
+Count the number of sent emails for each campaign, grouped by day.
+
+Query34 : source=my-index | where event_type="server" and status="offline" | stats count() by host
+Count the number of times each server went offline.
+
+Query 36: source=my-index | where event_type="login" and status="failure" | stats count() by day(timestamp)
+Count the number of failed login attempts for each day.
+
+Query 37: source=my-index | where event_type="file_upload" | stats count() by user_id, file_extension
+Count the number of file uploads for each user, grouped by file extension.
+
+Query 38: source=my-index | where event_type="page_view" and device_type="mobile" | stats count() by page_url
+Count the number of mobile page views for each page URL.
+
+Query 39: source=my-index | where event_type="order" and order_status="completed" | stats sum(order_total) by day(timestamp)
+Calculate the total revenue from completed orders for each day.
+
+Query 40: source=my-index | where event_type="support_ticket" | stats count() by ticket_priority, ticket_status
+Count the number of support tickets for each priority and status combination.
+
+Query 41: source=my-index | where event_type="resource_usage" and resource_type="CPU" | stats max(usage_percentage) by host
+Calculate the maximum CPU usage percentage for each host.
+
+Query 42: source=my-index | where event_type="transaction" and transaction_status="failed" | stats count() by error_code
+Count the number of failed transactions for each error code.
+
+Query 43: source=my-index | where event_type="user_feedback" | stats avg(rating) by day(timestamp)
+Calculate the average user feedback rating for each day.
+
+Query 44: source=my-index | where event_type="inventory_update" | stats count() by product_id, action
+Count the number of inventory updates for each product, grouped by action (e.g., restock, sold).
+
+Query 45: source=my-index | where event_type="product_view" | stats count() by product_id, user_id
+Count the number of product views for each user-product combination.
+
+Query 46: source=my-index | where event_type="comment" | stats count() by post_id, day(timestamp)
+Count the number of comments for each post, grouped by day.
+
+Query 47: source=my-index | where event_type="user" and user_status="active" | stats count() by registration_date
+Count the number of active users for each registration date.
+
+Query 48: source=my-index | where event_type="email_open" | stats count() by user_id, day(timestamp)
+Count the number of email opens for each user, grouped by day.
+
+Query 49: source=my-index | where event_type="server" and status="online" | stats count() by day(timestamp), host
+Count the number of times each server went online, grouped by day.
+
+Query 50: source=my-index | where event_type="payment" | stats sum(payment_amount) by payment_method, day(timestamp)
+Calculate the total payment amount for each payment method, grouped by day.
+
+Query 51: source=my-index | where event_type="file_access" | stats count() by file_id, user_id
+Count the number of file accesses for each user-file combination.
+
+Query 52: source=my-index | where event_type="user_deletion" | stats count() by day(timestamp), deletion_reason
+Count the number of user deletions for each deletion reason, grouped by day.
+
+Query 53: source=my-index | where event_type="backup" | stats count() by day(timestamp), backup_type
+Count the number of backups
+
+Query 54: source=my-index | where event_type="network_traffic" | stats sum(bytes_received), sum(bytes_sent) by host
+
+Calculate the total bytes received and sent for each host.
+Query 55: source=my-index | where event_type="registration" | stats count() by source, day(timestamp)
+
+Count the number of registrations for each source, grouped by day.
+Query 56: source=my-index | where event_type="file_delete" | stats count() by user_id, file_extension
+
+Count the number of file deletions for each user, grouped by file extension.
+Query 57: source=my-index | where event_type="order" and payment_method="credit_card" | stats count() by day(timestamp)
+
+Count the number of orders paid with credit cards, grouped by day.
+Query 58: source=my-index | where event_type="search" | stats count() by search_query, user_id
+
+Count the number of searches for each user-search query combination.
+Query 59: source=my-index | where event_type="webinar" | stats count() by webinar_id, user_id
+
+Count the number of webinar views for each user-webinar combination.
+Query 60: source=my-index | where event_type="server_maintenance" | stats count() by day(timestamp), maintenance_type
+
+Count the number of server maintenance events for each maintenance type, grouped by day.
+Query 61: source=my-index | where event_type="error" and error_severity="warning" | stats count() by error_type, user_id
+
+Count the number of warning errors for each error type and user combination.
+Query 62: source=my-index | where event_type="ab_test" | stats count() by test_id, variation
+
+Count the number of events for each A/B test variation and test ID combination.
+Query 63: source=my-index | where event_type="email_unsubscribe" | stats count() by day(timestamp), reason
+
+Count the number of email unsubscriptions for each reason, grouped by day.
+Query 64: source=my-index | where event_type="appointment" | stats count() by service_id, staff_id
+
+Count the number of appointments for each service-staff combination.
+Query 65: source=my-index | where event_type="storage_usage" | stats avg(used_space) by user_id, month(timestamp)
+
+Calculate the average used storage space for each user, grouped by month.
+Query 66: source=my-index | where event_type="server_restart" | stats count() by host, day(timestamp)
+
+Count the number of server restarts for each host, grouped by day.
+Query 67: source=my-index | where event_type="customer_support_call" | stats count() by agent_id, day(timestamp)
+
+Count the number of customer support calls for each agent, grouped by day.
+Query 68: source=my-index | where event_type="project_update" | stats count() by project_id, user_id
+
+Count the number of project updates for each user-project combination.
+Query 69: source=my-index | where event_type="campaign" and campaign_status="completed" | stats count() by day(timestamp), campaign_type
+
+Count the number of completed campaigns for each campaign type, grouped by day.
+Query 70: source=my-index | where event_type="order_cancellation" | stats count() by cancellation_reason, day(timestamp)
+
+Count the number of order cancellations for each cancellation reason, grouped by day.

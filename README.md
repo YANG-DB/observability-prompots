@@ -25,24 +25,12 @@ The repository is organized into the following sections:
 5. **Infrastructure Monitoring**: Prompts addressing various aspects of monitoring infrastructure components, such as servers, containers, and networks.
 6. **Application Performance Management**: Prompts related to monitoring and optimizing the performance of applications, including identifying bottlenecks and improving user experience.
 
+###  LLM High Level Architecture Diagram
+<img width="865" alt="High Level LLM Conversations Architecture" src="https://user-images.githubusercontent.com/48943349/230199548-10c5f6c5-6211-4793-893b-a2e2af16358c.png">
+
 ## Usage
 
 To use the prompts in this repository, simply choose the relevant prompt from the appropriate section, and input it into your LLM-powered tool. The AI model should generate a response or provide assistance based on the prompt and context provided.
-
-### Run Demo
-```text
-pip install -r requirements.txt
-
-uvicorn main:app --reload   
-
-curl -X 'POST' \
-        'http://127.0.0.1:8000/question' \
-        -H 'accept: text/plain' \
-        -H 'Content-Type: text/plain' \
-        -d 'what is an integration ?'
-```
-
----
 
 ## Contributing
 

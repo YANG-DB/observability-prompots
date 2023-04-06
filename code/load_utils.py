@@ -14,26 +14,30 @@ def loadDocuments() -> List[Document]:
     # documents = loader.load()
 
     # load a documentation folder for integration
-    loader = DirectoryLoader('spec', glob="**/*.md")
-    documents = loader.load()
+    # loader = DirectoryLoader('spec', glob="**/*.md")
+    documents = []
 
-    # load ppl samples queries
-    loader = DirectoryLoader('prompts', glob="**/*.txt")
+    # load all documentation from opensearch docs/blogs
+    loader = DirectoryLoader("../static_data", glob="**/*.md")
     for doc in loader.load():
         documents.append(doc)
 
     # load ppl samples queries
-    loader = DirectoryLoader('samples', glob="**/*.txt")
+    loader = DirectoryLoader("../prompts", glob="**/*.txt")
+    for doc in loader.load():
+        documents.append(doc)
+
+    # load ppl samples queries
+    loader = DirectoryLoader("../samples", glob="**/*.txt")
     for doc in loader.load():
         documents.append(doc)
 
     # load O/S queries responses
-    loader = DirectoryLoader('queries', glob="**/*.txt")
+    loader = DirectoryLoader("../queries", glob="**/*.txt")
     for doc in loader.load():
         documents.append(doc)
 
     # split content
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     return text_splitter.split_documents(documents)
-
 
