@@ -1,45 +1,153 @@
 # Questions:
 ## finding information in logs
-> **_Q:_** from all of the above text prompts, can you please tell me the indices in my system ?
+> **_Q:_**
+> given this is the `_cat/indices` results
+```text
+    index status: green open, index name: sample-ecommerce
+    index status: green open, index name: .kibana_92668751_admin_1
+    index status: green open, index name: moviegeek-logs-2023.03.24
+    index status: green open, index name: .opendistro-reports-definitions
+    index status: green open, index name: .kibana_1
+    index status: green open, index name: .opendistro_security
+    index status: green open, index name: .opendistro-reports-instances
+    index status: green open, index name: otel-v1-apm-span-000001
+    index status: green open, index name: sample-host-health
+    index status: green open, index name: security-auditlog-2023.03.24
+    index status: green open, index name: imdb-data
+    index status: green open, index name: .opensearch-observability
+    index status: green open, index name: metricbeat-2023.03.24
+    index status: green open, index name: opensearch_dashboards_sample_data_logs
+    index status: green open, index name: opensearch_dashboards_sample_data_flights
+    index status: green open, index name: sample-http-responses
+    
+    index status: green open, index name: sso_logs-nginx-prod
+    index status: green open, index name: sso_traces-us-prod
+    index status: green open, index name: sso_metrics-us-prod
+    index status: green open, index name: sso_logs-aws-alb
+    
+    
+    index status: green open, index name: otel-v1-apm-service-map
+    index status: green open, index name: .opendistro-job-scheduler-lock
+    index status: green open, index name: opensearch_dashboards_sample_data_ecommerce
+    index status: green open, index name: .opensearch-notifications-config
+    
+    which logs indices I have in my system?
+```
 
 > **_A:_**
 
-    ```text
-        sample-ecommerce
-        .kibana_92668751_admin_1
-        moviegeek-logs-2023.03.24
-        .opendistro-reports-definitions
-        .kibana_1
-        .opendistro_security
-        .opendistro-reports-instances
-        otel-v1-apm-span-000
-    ```
----
-
-> **_Q:_** which of these indices are considered to have an observability logs schema mapping ?
-
-> **_A:_** sso_logs-nginx-prod
----
-> **_Q:_** can you create a ppl query to determine the average errors per day I encountered in my system ?
-
-> **_A:_** 
 ```text
-source=sso_logs-nginx-prod
-| where log.level == 'ERROR'
-| stats count() as error_count by date_histogram('@timestamp', '1d', 'UTC')
-| eval days_since_start = (floor(epoch() - min('@timestamp')) / (24 * 60 * 60))
-| eval avg_errors_per_day = error_count / days_since_start
-```
+    Based on the `_cat/indices` results, the following indices appear to be related to logs:
+    - moviegeek-logs-2023.03.24
+    - security-auditlog-2023.03.24
+    - sso_logs-nginx-prod
+    - sso_traces-us-prod
+    - sso_metrics-us-prod
+    - sso_logs-aws-alb
+  ```
 ---
 
-> **_Q:_** can you correlate the services that are the most relevant to the errors in the former query ?
+> **_Q:_**
+```text
+Given this is a response for the `sso_logs-nginx-prod/_mapping` api call
+
+index fields:
+field name: @timestamp field, type: date
+field name: attributes.properties.data_stream.properties.dataset field, type: keyword
+field name: attributes.properties.data_stream.properties.namespace field, type: keyword
+field name: attributes.properties.data_stream.properties.type field, type: keyword
+field name: body field, type: text
+field name: communication.properties.destination.properties.address field, type: text
+field name: communication.properties.destination.properties.address.fields.keyword field, type: keyword
+field name: communication.properties.destination.properties.bytes field, type: long
+field name: communication.properties.destination.properties.domain field, type: text
+field name: communication.properties.destination.properties.domain.fields.keyword field, type: keyword
+field name: communication.properties.destination.properties.ip field, type: ip
+field name: communication.properties.destination.properties.mac field, type: keyword
+field name: communication.properties.destination.properties.packets field, type: long
+field name: communication.properties.destination.properties.port field, type: long
+field name: communication.properties.sock.properties.family field, type: keyword
+field name: communication.properties.source.properties.address field, type: text
+field name: communication.properties.source.properties.address.fields.keyword field, type: keyword
+field name: communication.properties.source.properties.bytes field, type: long
+field name: communication.properties.source.properties.domain field, type: text
+field name: communication.properties.source.properties.domain.fields.keyword field, type: keyword
+field name: communication.properties.source.properties.ip field, type: ip
+field name: communication.properties.source.properties.mac field, type: keyword
+field name: communication.properties.source.properties.packets field, type: long
+field name: communication.properties.source.properties.port field, type: long
+field name: container_id field, type: text
+field name: container_id.fields.keyword field, type: keyword
+field name: container_name field, type: text
+field name: container_name.fields.keyword field, type: keyword
+field name: event.properties.category field, type: keyword
+field name: event.properties.domain field, type: keyword
+field name: event.properties.exception.properties.message field, type: keyword
+field name: event.properties.exception.properties.stacktrace field, type: text
+field name: event.properties.exception.properties.type field, type: keyword
+field name: event.properties.kind field, type: keyword
+field name: event.properties.name field, type: keyword
+field name: event.properties.result field, type: keyword
+field name: event.properties.type field, type: keyword
+field name: http.properties.client.properties.ip field, type: ip
+field name: http.properties.flavor field, type: keyword
+field name: http.properties.request.properties.body.properties.content field, type: text
+field name: http.properties.request.properties.bytes field, type: long
+field name: http.properties.request.properties.id field, type: text
+field name: http.properties.request.properties.id.fields.keyword field, type: keyword
+field name: http.properties.request.properties.method field, type: keyword
+field name: http.properties.request.properties.mime_type field, type: keyword
+field name: http.properties.request.properties.referrer field, type: keyword
+field name: http.properties.resent_count field, type: integer
+field name: http.properties.response.properties.body.properties.content field, type: text
+field name: http.properties.response.properties.bytes field, type: long
+field name: http.properties.response.properties.id field, type: text
+field name: http.properties.response.properties.id.fields.keyword field, type: keyword
+field name: http.properties.response.properties.status_code field, type: integer
+field name: http.properties.route field, type: keyword
+field name: http.properties.schema field, type: keyword
+field name: http.properties.target field, type: keyword
+field name: http.properties.url field, type: keyword
+field name: http.properties.user_agent field, type: keyword
+field name: instrumentationScope.properties.dropped_attributes_count field, type: integer
+field name: instrumentationScope.properties.name field, type: text
+field name: instrumentationScope.properties.name.fields.keyword field, type: keyword
+field name: instrumentationScope.properties.schemaUrl field, type: text
+field name: instrumentationScope.properties.schemaUrl.fields.keyword field, type: keyword
+field name: instrumentationScope.properties.version field, type: text
+field name: instrumentationScope.properties.version.fields.keyword field, type: keyword
+field name: log field, type: text
+field name: log.fields.keyword field, type: keyword
+field name: observedTimestamp field, type: date
+field name: observerTime field, type: date
+field name: schemaUrl field, type: text
+field name: schemaUrl.fields.keyword field, type: keyword
+field name: severity.properties.number field, type: long
+field name: severity.properties.text field, type: text
+field name: severity.properties.text.fields.keyword field, type: keyword
+field name: source field, type: text
+field name: source.fields.keyword field, type: keyword
+field name: spanId field, type: keyword
+field name: span_id field, type: text
+field name: span_id.fields.keyword field, type: keyword
+field name: traceId field, type: keyword
+field name: trace_id field, type: text
+field name: trace_id.fields.keyword field, type: keyword
+
+does this index follow the simples schema for observability structure?
+```
+
+> **_A:_** `sso_logs-nginx-prod` index follows the simple schema
+---
+> **_Q:_** can you create a ppl query to determine the average errors per day I encountered in my  sso_logs-nginx-prod log ?
 
 > **_A:_**
 ```text
-source=sso_logs-nginx-prod
-| where log.level == 'ERROR'
-| stats count() as error_count by date_histogram('@timestamp', '1d', 'UTC'), service.name
-| eval days_since_start = (floor(epoch() - min('@timestamp')) / (24 * 60 * 60))
-| eval avg_errors_per_day = error_count / days_since_start
-| sort by avg_errors_per_day desc
+search from sso_logs-nginx-prod
+| where http.properties.response.properties.status_code >= 400
+| bucket _time span=1d
+| stats count by _time
+| stats avg(count) as avg_errors_per_day
+
 ```
+---
