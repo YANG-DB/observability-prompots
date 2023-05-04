@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard] # For running FastAPI server
+pycocotools
+chromadb
+layoutparser[layoutmodels,tesseract]
+unstructured[local-inference]
+python-dotenv
+langchain
+openai
+typing

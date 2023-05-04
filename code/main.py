@@ -9,6 +9,7 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
+from dotenv import load_dotenv
 
 #   chat prompt
 from langchain.prompts.chat import (
@@ -18,9 +19,11 @@ from langchain.prompts.chat import (
 )
 from langchain.vectorstores import Chroma
 
-# Web Server
+
+# Web Server.gitignore
 from load_utils import loadDocuments
 
+load_dotenv()  # Load environment variables from the .env file
 app = FastAPI()
 
 # Enable CORS
