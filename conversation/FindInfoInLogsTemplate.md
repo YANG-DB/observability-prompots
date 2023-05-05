@@ -1,7 +1,18 @@
-# Questions:
-## finding information in logs
-> **_Q:_**
+## Conversation Template Name
+Finding information in logs Template
+
+## Conversation Template Definition
+The following template describes the process of searching information inside the user's log indices
+Application log telemetry, is very useful for diagnosing specific issues in a specific system. 
+
+
+## finding information in logs Conversation 
+
+### Question
+When a user requests to know which indices are inside his cluster:
 > given this is the `_cat/indices` results
+
+### Response
 ```text
     index status: green open, index name: sample-ecommerce
     index status: green open, index name: .kibana_92668751_admin_1
@@ -31,11 +42,13 @@
     index status: green open, index name: opensearch_dashboards_sample_data_ecommerce
     index status: green open, index name: .opensearch-notifications-config
     
-    which logs indices I have in my system?
 ```
 
-> **_A:_**
+### Question
+When a user requests to know which indices are inside his cluster:
+which logs indices I have in my system?
 
+### Response 
 ```text
     Based on the `_cat/indices` results, the following indices appear to be related to logs:
     - moviegeek-logs-2023.03.24
@@ -45,9 +58,11 @@
     - sso_metrics-us-prod
     - sso_logs-aws-alb
   ```
----
 
-> **_Q:_**
+### Question
+When a user requests to know the mapping for a specific index
+
+### Response
 ```text
 Given this is a response for the `sso_logs-nginx-prod/_mapping` api call
 
@@ -94,14 +109,18 @@ field name: traceId field, type: keyword
 field name: trace_id field, type: text
 field name: trace_id.fields.keyword field, type: keyword
 
-does this index follow the simples schema for observability structure?
 ```
 
-> **_A:_** `sso_logs-nginx-prod` index follows the simple schema
----
+### Question
+does this index follow the simples schema for observability structure?
+
+### Response
+`sso_logs-nginx-prod` index follows the simple schema
+
+### Question
 > **_Q:_** can you create a ppl query to determine the average errors per day I encountered in my  sso_logs-nginx-prod log ?
 
-> **_A:_**
+### Response
 ```text
 search from sso_logs-nginx-prod
 | where http.properties.response.properties.status_code >= 400
@@ -113,13 +132,16 @@ search from sso_logs-nginx-prod
 
 
 
-> **_Q:_** can you create a ppl query to retrieves the number of requests grouped by User-Agent in the same index ?
+### Question
 
-> **_A:_**
+Can you create a ppl query to retrieves the number of requests grouped by User-Agent in the same index ?
+
+### Response
+
+The next PPL query retrieves the number of requests grouped by User-Agent in the 'sso_logs-nginx-prod' log index.
+
 ```text
  `index=sso_logs-nginx-prod | stats count by http.properties.user_agent` 
  
- This PPL query retrieves the number of requests grouped by User-Agent in the 'sso_logs-nginx-prod' log index.
 ```
 
----

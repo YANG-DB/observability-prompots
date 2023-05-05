@@ -41,8 +41,7 @@ chat_history = []
 system_template = """Use the following pieces of context to answer the users question. 
 If you don't know the answer, just say that you don't know, don't try to make up an answer.
 In any conversation only return the minimal response that answers exactly the requested question without adding any additional information or explanations.
-When requested to create a query always create a ppl query unless the request explicitly defines the query language.
-
+When asked a question always try to match it with a Conversation Template - and answer that the scenario is described in the specific template
 
 ----------------
 {context}"""
