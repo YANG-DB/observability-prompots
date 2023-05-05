@@ -8,7 +8,6 @@ Application telemetry, such as the kind that OpenTelemetry can provide, is very 
 ## Diagnosis
 The first step in diagnosing a problem is to determine that a problem exists. Often the first stop will be a metrics dashboard provided by a tool such as metrics analytics under open search observability.
 
-
 ## Dashboards
 This template contains dashboards with a number of charts:
 
